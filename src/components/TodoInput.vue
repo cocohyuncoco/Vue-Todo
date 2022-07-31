@@ -10,36 +10,23 @@
 <script>
 export default {
 
-    data : function(){
+    // data는 함수. 하나의 객체만을 반환
+    data: function(){
         return {
             newTodoTtem:""           
         }
     },
-
     methods: {
-        addTodo: function(){
-            //console.log(this.newTodoTtem);
-            // 저장하는 로직
-            // setItem 키, 벨류 형태로 셋아이템 호출
-
+        addTodo(){
             if (this.newTodoTtem !== '') { //값이 있을때
-                // 자바스크립트 객체를 스프링으로 변환해주는 API
-                var obj = { completed: false, item: this.newTodoTtem };
-                localStorage.setItem(this.newTodoTtem, JSON.stringify(obj));
-                //localStorage.setItem(this.newTodoTtem, obj);      
-                
-                this.cleaerInput();          
+               this.$emit('addTodoItem', this.newTodoTtem);              
+               this.cleaerInput();          
             }
-
-
-            
         },
-        cleaerInput: function(){
+        cleaerInput(){
             this.newTodoTtem='';
         },
-
     }
-
 };
 </script>
 

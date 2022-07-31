@@ -1,7 +1,9 @@
 <template>
-<!-- html -->
+    <!-- html -->
     <header>
-        <h1>TODO it!</h1>
+        <h1>TODO it!
+            <i class="fa-solid fa-child-reaching"></i>
+        </h1>
     </header>
 </template>
 
