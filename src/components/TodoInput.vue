@@ -25,7 +25,7 @@ export default {
         Modal
     },
     // data는 함수. 하나의 객체만을 반환
-    data: function(){
+    data(){
         return {
             newTodoTtem:"",      
             showModal: false      
