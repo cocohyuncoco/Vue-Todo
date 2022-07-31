@@ -4,16 +4,31 @@
         <span class="addContainer" v-on:click="addTodo">
             <i class="fa-solid fa-plus" style="color:#fff;"></i>
         </span>
+
+        <Modal v-if="showModal" @close="showModal = false">
+            <!--
+            you can use custom content here to overwrite
+            default content
+            -->
+            <h3 slot="header">경고!</h3>
+            <p slot="body">할 일을 입력하세요</p>
+        </Modal>
     </div>
 </template>
 
 <script>
-export default {
 
+import Modal from './common/AlertModal.vue'
+
+export default {
+    components : {
+        Modal
+    },
     // data는 함수. 하나의 객체만을 반환
     data: function(){
         return {
-            newTodoTtem:""           
+            newTodoTtem:"",      
+            showModal: false      
         }
     },
     methods: {
@@ -21,6 +36,8 @@ export default {
             if (this.newTodoTtem !== '') { //값이 있을때
                this.$emit('addTodoItem', this.newTodoTtem);              
                this.cleaerInput();          
+            }else{
+                this.showModal = !this.showModal;
             }
         },
         cleaerInput(){
