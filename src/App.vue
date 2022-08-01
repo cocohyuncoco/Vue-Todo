@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <TodoHeader> </TodoHeader>
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
-
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="remobvOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
-
-    <TodoFooter v-on:cleartAll="clearAllItem"></TodoFooter>
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -22,38 +20,6 @@ export default {
       todoItems: []
     }
   },
-  methods: {
-    addOneItem(todoItem){
-      var obj = { completed: false, item: todoItem };
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    remobvOneItem(todoItem, index){
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1); //idx 데이터 하나 삭제
-    },
-    toggleOneItem(todoItem, index){
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      
-      // 로컬 스토리지 데이터를 갱신
-      localStorage.removeItem(todoItem.item); //아이템 지우기
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem)); //아이템 다시 세팅
-    },
-    clearAllItem() {
-      localStorage.clear();
-      this.todoItems =[];
-    },
-  },
-  // 라이프 사이클_ 인스턴스가 생성되자마자 호출되는 라이프 사이클 훅 (로직이 돔)
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {          
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-        }
-      }
-    }
-  },
   components: {
    // 컴포넌트 태그명 : 컴포넌트 내용
     TodoHeader,
@@ -61,8 +27,6 @@ export default {
     TodoList,
     TodoFooter
   }
-  
-
  }
 </script>
 

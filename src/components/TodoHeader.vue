@@ -2,7 +2,7 @@
     <!-- html -->
     <header>
         <h1>TODO it!
-            <i class="fa-solid fa-child-reaching"></i>
+             <i class="fa-solid fa-child-reaching"></i>
         </h1>
     </header>
 </template>

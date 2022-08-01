@@ -34,7 +34,11 @@ export default {
     methods: {
         addTodo(){
             if (this.newTodoTtem !== '') { //값이 있을때
-               this.$emit('addTodoItem', this.newTodoTtem);              
+            //    this.$emit('addTodoItem', this.newTodoTtem);   
+            
+                const text = this.newTodoTtem.trim();
+                this.$store.commit('addOneItem', text);              
+               
                this.cleaerInput();          
             }else{
                 this.showModal = !this.showModal;
