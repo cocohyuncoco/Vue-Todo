@@ -1,14 +1,14 @@
 <template>
     <div>
         <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+            <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
                 <i class="checkBth fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-                    v-on:click="toggleComplete(todoItem, index)"></i>
+                    v-on:click="toggleComplete({todoItem, index})"></i>
 
                 <!-- 객체.속성값으로 접근 -->
                 <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}</span>
 
-                <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+                <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
                     <i class="fa-solid fa-trash-can"></i>
                 </span>
             </li>
@@ -17,19 +17,33 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
+
 export default {
     methods: {
-        removeTodo(todoItem, index) {
-            // this.$emit('removeItem', todoItem, index);                   
-            this.$store.commit('remobvOneItem', {todoItem, index});
-
-        },
-        toggleComplete(todoItem, index) {
-            // this.$emit('toggleItem', todoItem, index);
-            this.$store.commit('toggleOneItem', { todoItem, index });
-        }
+        ...mapMutations({
+            removeTodo: 'remobvOneItem',
+            toggleComplete: 'toggleOneItem'
+        })
+        // removeTodo(todoItem, index) {
+        //     // this.$emit('removeItem', todoItem, index);                   
+        //      this.$store.commit('remobvOneItem', {todoItem, index});          
+        // },
+        // toggleComplete(todoItem, index) {
+        //     // this.$emit('toggleItem', todoItem, index);
+        //     this.$store.commit('toggleOneItem', { todoItem, index });
+        // }
     },
-    
+    computed:{
+        // todoItems(){
+        //     return this.$store.getters.storedTodoItems;
+        // },
+        ...mapGetters(['storedTodoItems']),
+        // ...mapGetters({
+        //     todoItems: 'storedTodoItems'            
+        // }),
+    }
 };
 </script>
 
@@ -78,6 +92,6 @@ li{
 .list-leave-to {
     /* .list-leave-active below version 2.1.8 */
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateY(-30px);
 }
 </style>
