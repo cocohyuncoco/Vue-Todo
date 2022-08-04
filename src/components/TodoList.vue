@@ -3,12 +3,12 @@
         <transition-group name="list" tag="ul">
             <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
                 <i class="checkBth fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-                    v-on:click="toggleComplete({todoItem, index})"></i>
+                    @click="toggleComplete({todoItem, index})"></i>
 
                 <!-- 객체.속성값으로 접근 -->
                 <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}</span>
 
-                <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
+                <span class="removeBtn" @click="removeTodo({todoItem, index})">
                     <i class="fa-solid fa-trash-can"></i>
                 </span>
             </li>
